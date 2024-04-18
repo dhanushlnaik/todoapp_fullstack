@@ -59,7 +59,7 @@ function CreateBudget() {
 
   return (
     <CreateContentStyled onSubmit={handleSubmit} theme={theme}>
-      <h1>Create a Task</h1>
+      <h1>Add Money</h1>
       <div className="input-control">
         <label htmlFor="title">Title</label>
         <input
@@ -96,7 +96,7 @@ function CreateBudget() {
       <div className="submit-btn flex justify-end">
         <Button
           type="submit"
-          name="Create Task"
+          name="Add Budget"
           icon={add}
           padding={"0.8rem 2rem"}
           borderRad={"0.8rem"}
