@@ -23,3 +23,13 @@ model Task{
   updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
   userId      String    
 }
+
+model Budget{
+  id          String    @id @default(cuid()) @map("_id")
+  title       String
+  amount      String  @default("0")
+  date        String
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
+  userId      String    
+}

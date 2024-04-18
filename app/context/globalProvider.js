@@ -17,6 +17,7 @@ export const GlobalProvider = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
 
   const [tasks, setTasks] = useState([]);
+  const [budgets, setBudget] = useState([]);
 
   const theme = themes[selectedTheme];
 
@@ -51,12 +52,43 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
+  const allBudget = async () => {
+    setIsLoading(true);
+    try {
+      const res = await axios.get("/api/budget");
+
+      const sorted = res.data.sort((a, b) => {
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      });
+
+      setBudget(sorted);
+
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const deleteTask = async (id) => {
     try {
       const res = await axios.delete(`/api/tasks/${id}`);
       toast.success("Task deleted");
 
       allTasks();
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    }
+  };
+
+  const deleteBudget = async (id) => {
+    try {
+      const res = await axios.delete(`/api/budget/${id}`);
+      toast.success("Budget deleted");
+
+      allBudget();
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
@@ -90,6 +122,8 @@ export const GlobalProvider = ({ children }) => {
         theme,
         tasks,
         deleteTask,
+        deleteBudget,
+        allBudget,
         isLoading,
         completedTasks,
         importantTasks,
