@@ -16,13 +16,14 @@ interface Props {
 
 function Budgets({ title, tasks }: Props) {
   const { theme, isLoading, openModal, modal } = useGlobalState();
-  const [budgets, setBudget] = useState([]);
+  const [budgets, setBudgets] = useState<{ id: string, title: string, amount: string, date: string }[]>([]);
+
   const allBudget = async () => {
     try {
       const res = await axios.get("/api/budget");
       console.log(res.data)
 
-      setBudget(res.data);
+      setBudgets(res.data);
 
     } catch (error) {
       console.log(error);
