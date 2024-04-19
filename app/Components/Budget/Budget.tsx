@@ -32,7 +32,6 @@ function Budgets({ title, tasks }: Props) {
             title={task.title}
             amount={task.amount}
             date={task.date}
-            isCompleted={task.isCompleted}
             id={task.id}
           />
         ))}

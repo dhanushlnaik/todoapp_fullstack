@@ -9,47 +9,17 @@ interface Props {
   title: string;
   amount: string;
   date: string;
-  isCompleted: boolean;
   id: string;
 }
 
-function BudgetItem({ title, amount, date, isCompleted, id }: Props) {
+function BudgetItem({ title, amount, date, id }: Props) {
   const { theme, deleteBudget, updateBudget } = useGlobalState();
   return (
     <BudgetItemStyled theme={theme}>
       <h1>{title}</h1>
       <p>{amount}</p>
       <p className="date">{formatDate(date)}</p>
-      <div className="task-footer">
-        {isCompleted ? (
-          <button
-            className="completed"
-            onClick={() => {
-              const task = {
-                id,
-                isCompleted: !isCompleted,
-              };
 
-              updateBudget(task);
-            }}
-          >
-            Completed
-          </button>
-        ) : (
-          <button
-            className="incomplete"
-            onClick={() => {
-              const task = {
-                id,
-                isCompleted: !isCompleted,
-              };
-
-              updateBudget(task);
-            }}
-          >
-            Incomplete
-          </button>
-        )}
         <button className="edit">{edit}</button>
         <button
           className="delete"
@@ -59,7 +29,7 @@ function BudgetItem({ title, amount, date, isCompleted, id }: Props) {
         >
           {trash}
         </button>
-      </div>
+
     </BudgetItemStyled>
   );
 }

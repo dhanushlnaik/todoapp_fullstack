@@ -4,10 +4,11 @@ import { useGlobalState } from "../context/globalProvider";
 import Tasks from "../Components/Tasks/Tasks";
 import Budgets from "../Components/Budget/Budget";
 function page() {
-  const { importantTasks } = useGlobalState();
+  const { beedget } = useGlobalState();
+
   
 
-  return <Budgets title="Budget Tracker" tasks={importantTasks} />;
+  return <Budgets title="Budget Tracker" tasks={beedget} />;
 }
 
 export default page;
