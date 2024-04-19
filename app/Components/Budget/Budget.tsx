@@ -1,12 +1,13 @@
 "use client";
 import { useGlobalState } from "@/app/context/globalProvider";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import CreateContent from "../Modals/CreateContent";
 import { add, plus } from "@/app/utils/Icons";
 import Modal from "../Modals/Modal";
 import BudgetItem from "./BudgetIstems";
 import CreateBudget from "../Modals/CreateBudget";
+import axios from "axios";
 
 interface Props {
   title: string;
@@ -15,7 +16,20 @@ interface Props {
 
 function Budgets({ title, tasks }: Props) {
   const { theme, isLoading, openModal, modal } = useGlobalState();
+  const [budgets, setBudget] = useState([]);
+  const allBudget = async () => {
+    try {
+      const res = await axios.get("/api/budget");
+      console.log(res.data)
 
+      setBudget(res.data);
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  allBudget();
+  console.log(budgets);
   return (
     <BudgetStyled theme={theme}>
       {modal && <Modal content={<CreateBudget />} />}
@@ -26,7 +40,7 @@ function Budgets({ title, tasks }: Props) {
       </button>
 
       <div className="tasks grid">
-        {tasks.map((task) => (
+        {budgets.map((task) => (
           <BudgetItem
             key={task.id}
             title={task.title}
